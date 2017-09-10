@@ -1,9 +1,9 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import CalendarHeader from './calendar/CalendarHeader';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
+import WeekPanel from './week/WeekPanel';
 
 const WeekCalendar = createReactClass({
   propTypes: {
@@ -25,19 +25,16 @@ const WeekCalendar = createReactClass({
 
   render() {
     const { props, state } = this;
-    const { mode, value } = state;
+    const { value } = state;
+    const { locale, prefixCls, weekCellRender, weekCellContentRender } = props;
     const children = (
-      <CalendarHeader
-        prefixCls={props.prefixCls}
-        mode={mode}
-        value={value}
-        locale={props.locale}
-        disabledWeek={props.disabledDate}
-        weekCellRender={props.monthCellRender}
-        weekCellContentRender={props.weekCellContentRender}
-        onWeekSelect={this.onSelect}
-        onValueChange={this.setValue}
-        onPanelChange={this.handlePanelChange}
+      <WeekPanel
+        locale={locale}
+        defaultValue={value}
+        rootPrefixCls={prefixCls}
+        onSelect={this.onMonthSelect}
+        cellRender={weekCellRender}
+        contentRender={weekCellContentRender}
       />
     );
     return this.renderRoot({

@@ -1,7 +1,7 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import MonthTable from './WeekTable';
+import WeekTable from './WeekTable';
 
 function goYear(direction) {
   const next = this.state.value.clone();
@@ -13,7 +13,7 @@ function noop() {
 
 }
 
-const MonthPanel = createReactClass({
+export default createReactClass({
   propTypes: {
     onChange: PropTypes.func,
     disabledDate: PropTypes.func,
@@ -73,24 +73,39 @@ const MonthPanel = createReactClass({
     const prefixCls = this.prefixCls;
     return (
       <div className={prefixCls} style={props.style}>
-        <table>
+        <table cellPadding={5} cellSpacing={5}>
           <thead>
-          {Array.from({ length: 7 }, (v, i) => i).map(i =>
+          <tr>
+            <th/>
+            {Array.from({ length: 7 }, (v, i) => i).map(i =>
               <th key={i}>{value.startOf('week').add(i, 'day').format('ddd DD/MMM')}</th>
-          )}
+            )}
+          </tr>
           </thead>
-            /*<MonthTable
-              disabledDate={props.disabledDate}
-              onSelect={this.setAndSelectValue}
-              locale={locale}
-              value={value}
-              cellRender={cellRender}
-              contentRender={contentRender}
-              prefixCls={prefixCls}
-            />*/
+          <tbody>
+          <tr>
+            <td>all day</td>
+            {Array.from({ length: 7 }, (v, i) => i).map(i =>
+              <td key={i}>{}</td>
+            )}
+          </tr>
+          <tr>
+            <td>{value.startOf('day').format('hh:mm a')}</td>
+            {Array.from({ length: 7 }, (v, i) => i).map(i =>
+              <td key={i}>{}</td>
+            )}
+          </tr>
+          <WeekTable
+            disabledDate={props.disabledDate}
+            onSelect={this.setAndSelectValue}
+            locale={locale}
+            value={value}
+            cellRender={cellRender}
+            contentRender={contentRender}
+            prefixCls={prefixCls}
+          />
+          </tbody>
         </table>
       </div>);
   },
 });
-
-export default MonthPanel;
