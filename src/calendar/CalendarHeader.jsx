@@ -5,6 +5,7 @@ import toFragment from 'rc-util/lib/Children/mapSelf';
 import MonthPanel from '../month/MonthPanel';
 import YearPanel from '../year/YearPanel';
 import DecadePanel from '../decade/DecadePanel';
+import WeekPanel from '../week/WeekPanel';
 
 function goMonth(direction) {
   const next = this.props.value.clone();
@@ -145,6 +146,20 @@ const CalendarHeader = createReactClass({
     } = props;
 
     let panel = null;
+    if (mode === 'week') {
+      panel = (
+        <WeekPanel
+          locale={locale}
+          defaultValue={value}
+          rootPrefixCls={prefixCls}
+          onSelect={this.onMonthSelect}
+          disabledDate={disabledMonth}
+          cellRender={props.weekCellRender}
+          onWeekPanelShow={() => this.props.onPanelChange(null, 'week')}
+          contentRender={props.weekCellContentRender}
+        />
+      );
+    }
     if (mode === 'month') {
       panel = (
         <MonthPanel
