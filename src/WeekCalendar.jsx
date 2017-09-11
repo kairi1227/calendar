@@ -9,6 +9,8 @@ const WeekCalendar = createReactClass({
   propTypes: {
     weekCellContentRender: PropTypes.func,
     weekCellHeaderRender: PropTypes.func,
+    isShowAllDay: PropTypes.bool,
+    timeFormat: PropTypes.string,
   },
   mixins: [CommonMixin, CalendarMixin],
 
@@ -26,12 +28,15 @@ const WeekCalendar = createReactClass({
   render() {
     const { props, state } = this;
     const { value } = state;
-    const { locale, prefixCls, weekCellHeaderRender, weekCellContentRender } = props;
+    const { locale, prefixCls, weekCellHeaderRender,
+        weekCellContentRender, isShowAllDay, timeFormat } = props;
     const children = (
       <WeekPanel
         locale={locale}
         defaultValue={value}
         rootPrefixCls={prefixCls}
+        isShowAllDay={isShowAllDay}
+        timeFormat={timeFormat || 'HH:mm'}
         headerRender={weekCellHeaderRender}
         contentRender={weekCellContentRender}
       />

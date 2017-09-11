@@ -122,8 +122,8 @@ function disabledDate(value) {
 }
 
 function onWeekCellContentRender(value) {
-  // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
-  return `${value}day`;
+  console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
+  return '';
 }
 
 ReactDOM.render(
