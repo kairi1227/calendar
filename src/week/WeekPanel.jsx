@@ -59,7 +59,7 @@ export default createReactClass({
                   <div>{value.startOf('day').add(i, 'hour').format(timeFormat)}</div>
                     {Array.from({ length: 7 }, (v, l) => l).map(d =>
                       <div key={d} className={value.day() === d && 'today' || ''}>
-                        {contentRender(value)}
+                        {contentRender && contentRender(value) || ''}
                       </div>
                     )}
                 </div>
