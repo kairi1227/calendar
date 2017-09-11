@@ -131,7 +131,6 @@ ReactDOM.render(
     style={{
       zIndex: 1000,
       position: 'relative',
-      width: 600,
       margin: '0 auto',
     }}
   >

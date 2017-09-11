@@ -7,8 +7,8 @@ import WeekPanel from './week/WeekPanel';
 
 const WeekCalendar = createReactClass({
   propTypes: {
-    weekCellRender: PropTypes.func,
-    dateCellRender: PropTypes.func,
+    weekCellContentRender: PropTypes.func,
+    weekCellHeaderRender: PropTypes.func,
   },
   mixins: [CommonMixin, CalendarMixin],
 
@@ -26,14 +26,13 @@ const WeekCalendar = createReactClass({
   render() {
     const { props, state } = this;
     const { value } = state;
-    const { locale, prefixCls, weekCellRender, weekCellContentRender } = props;
+    const { locale, prefixCls, weekCellHeaderRender, weekCellContentRender } = props;
     const children = (
       <WeekPanel
         locale={locale}
         defaultValue={value}
         rootPrefixCls={prefixCls}
-        onSelect={this.onMonthSelect}
-        cellRender={weekCellRender}
+        headerRender={weekCellHeaderRender}
         contentRender={weekCellContentRender}
       />
     );

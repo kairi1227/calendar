@@ -1,7 +1,7 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import WeekTable from './WeekTable';
+// import WeekTable from './WeekTable';
 
 function goYear(direction) {
   const next = this.state.value.clone();
@@ -15,9 +15,8 @@ function noop() {
 
 export default createReactClass({
   propTypes: {
-    onChange: PropTypes.func,
-    disabledDate: PropTypes.func,
-    onSelect: PropTypes.func,
+    headerRender: PropTypes.func,
+    contentRender: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -67,45 +66,40 @@ export default createReactClass({
   render() {
     const props = this.props;
     const value = this.state.value;
-    const cellRender = props.cellRender;
-    const contentRender = props.contentRender;
-    const locale = props.locale;
+    const headerRender = props.headerRender;
+    // const contentRender = props.contentRender;
+    // const locale = props.locale;
     const prefixCls = this.prefixCls;
     return (
       <div className={prefixCls} style={props.style}>
-        <table cellPadding={5} cellSpacing={5}>
-          <thead>
-          <tr>
-            <th/>
+        <div className={`${prefixCls}-header`}>
+          <div/>
             {Array.from({ length: 7 }, (v, i) => i).map(i =>
-              <th key={i}>{value.startOf('week').add(i, 'day').format('ddd DD/MMM')}</th>
+                <div key={i} className={value.day() !== i && 'today' || ''}>{headerRender
+                && headerRender(value.startOf('week').add(i, 'day'))
+                || value.startOf('week').add(i, 'day').format('ddd DD/MMM')}</div>
             )}
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>all day</td>
+        </div>
+        <div className={`${prefixCls}-event`}>
+          <div className={'all-day'}>
+            <div>all day</div>
             {Array.from({ length: 7 }, (v, i) => i).map(i =>
-              <td key={i}>{}</td>
+                <div key={i} className={value.day() === i && 'today' || ''}>{''}</div>
             )}
-          </tr>
-          <tr>
-            <td>{value.startOf('day').format('hh:mm a')}</td>
-            {Array.from({ length: 7 }, (v, i) => i).map(i =>
-              <td key={i}>{}</td>
-            )}
-          </tr>
-          <WeekTable
-            disabledDate={props.disabledDate}
-            onSelect={this.setAndSelectValue}
-            locale={locale}
-            value={value}
-            cellRender={cellRender}
-            contentRender={contentRender}
-            prefixCls={prefixCls}
-          />
-          </tbody>
-        </table>
+          </div>
+          {
+            Array.from({ length: 24 }, (v, i) => i).map(i => {
+              return (
+                  <div className={'event-tr'} key={i}>
+                    <div>{value.startOf('day').add(i, 'hour').format('HH:mm A')}</div>
+                      {Array.from({ length: 7 }, (v, l) => l).map(d =>
+                          <div key={d} className={value.day() === d && 'today' || ''}>{''}</div>
+                      )}
+                  </div>
+              );
+            })
+          }
+        </div>
       </div>);
   },
 });
