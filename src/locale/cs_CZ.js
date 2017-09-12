@@ -24,4 +24,6 @@ export default {
   nextDecade: 'Následující dekáda',
   previousCentury: 'Předchozí století',
   nextCentury: 'Následující století',
+  week: 'Týden',
+  weekHeaderFormat: 'ddd D.M',
 };

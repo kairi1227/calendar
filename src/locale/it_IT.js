@@ -24,4 +24,6 @@ export default {
   nextDecade: 'Prossimo decennio',
   previousCentury: 'Secolo precedente',
   nextCentury: 'Prossimo secolo',
+  week: 'Settimana',
+  weekHeaderFormat: 'ddd D/M',
 };

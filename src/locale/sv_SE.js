@@ -24,4 +24,6 @@ export default {
   nextDecade: 'Nästa årtionde',
   previousCentury: 'Föreg århundrade',
   nextCentury: 'Nästa århundrade',
+  week: 'Vecka',
+  weekHeaderFormat: 'ddd MM-DD',
 };

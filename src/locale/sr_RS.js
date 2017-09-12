@@ -24,4 +24,6 @@ export default {
   nextDecade: 'Sledeća decenija',
   previousCentury: 'Prethodni vek',
   nextCentury: 'Sledeći vek',
+  week: 'Nedelju dana',
+  weekHeaderFormat: 'ddd DD.MMM',
 };

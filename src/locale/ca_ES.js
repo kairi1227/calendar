@@ -24,4 +24,6 @@ export default {
   nextDecade: 'Dècada següent',
   previousCentury: 'Segle anterior',
   nextCentury: 'Segle següent',
+  week: 'Setmana',
+  weekHeaderFormat: 'ddd D/M',
 };

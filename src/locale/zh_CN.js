@@ -24,5 +24,5 @@ export default {
   previousCentury: '上一世纪',
   nextCentury: '下一世纪',
   week: '周',
-  weekHeaderFormat: 'ddd MMM-DD',
+  weekHeaderFormat: 'ddd M月D',
 };

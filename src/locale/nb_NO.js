@@ -24,4 +24,6 @@ export default {
   nextDecade: 'Neste tiår',
   previousCentury: 'Forrige århundre',
   nextCentury: 'Neste århundre',
+  week: 'Uke',
+  weekHeaderFormat: 'ddd DD.MM',
 };

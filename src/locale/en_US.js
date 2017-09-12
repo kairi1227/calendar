@@ -25,5 +25,5 @@ export default {
   previousCentury: 'Last century',
   nextCentury: 'Next century',
   week: 'Week',
-  weekHeaderFormat: 'ddd DD/MMM',
+  weekHeaderFormat: 'ddd D/M',
 };

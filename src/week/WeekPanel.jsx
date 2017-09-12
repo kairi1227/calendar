@@ -1,7 +1,6 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-// import WeekTable from './WeekTable';
 
 export default createReactClass({
   propTypes: {
@@ -13,7 +12,6 @@ export default createReactClass({
 
   getInitialState() {
     const props = this.props;
-    // bind methods
     this.prefixCls = `${props.rootPrefixCls}-week-panel`;
     return {
       value: props.value || props.defaultValue,
@@ -34,7 +32,6 @@ export default createReactClass({
     const { isShowAllDay, headerRender, timeFormat, contentRender, locale } = props;
     const prefixCls = this.prefixCls;
     const day = value.clone();
-    // console.log(day.format('YYYY-MM-DD'), day.day())
     return (
       <div className={prefixCls} style={props.style}>
         <div className={`${prefixCls}-header`}>

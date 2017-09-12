@@ -24,4 +24,6 @@ export default {
   nextDecade: 'Järgmine dekaad',
   previousCentury: 'Eelmine sajand',
   nextCentury: 'Järgmine sajand',
+  week: 'Nädal',
+  weekHeaderFormat: 'ddd D.M',
 };
