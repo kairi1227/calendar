@@ -3,6 +3,7 @@ import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
+import WeekPanel from './week/WeekPanel';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
@@ -99,28 +100,53 @@ const FullCalendar = createReactClass({
         );
       }
     }
-
-    const table = type === 'date' ? (
-      <DateTable
-        dateRender={props.dateCellRender}
-        contentRender={props.dateCellContentRender}
-        locale={locale}
-        prefixCls={prefixCls}
-        onSelect={this.onSelect}
-        value={value}
-        disabledDate={disabledDate}
-      />
-    ) : (
-      <MonthTable
-        cellRender={props.monthCellRender}
-        contentRender={props.monthCellContentRender}
-        locale={locale}
-        onSelect={this.onMonthSelect}
-        prefixCls={`${prefixCls}-month-panel`}
-        value={value}
-        disabledDate={disabledDate}
-      />
-    );
+    let table = null;
+    switch (type) {
+      case 'date': {
+        table = (
+          <DateTable
+            dateRender={props.dateCellRender}
+            contentRender={props.dateCellContentRender}
+            locale={locale}
+            prefixCls={prefixCls}
+            onSelect={this.onSelect}
+            value={value}
+            disabledDate={disabledDate}
+          />
+        );
+        break;
+      }
+      case 'month': {
+        table = (
+          <MonthTable
+            cellRender={props.monthCellRender}
+            contentRender={props.monthCellContentRender}
+            locale={locale}
+            onSelect={this.onMonthSelect}
+            prefixCls={`${prefixCls}-month-panel`}
+            value={value}
+            disabledDate={disabledDate}
+          />
+        );
+        break;
+      }
+      case 'week': {
+        table = (
+          <WeekPanel
+            locale={locale}
+            value={value}
+            rootPrefixCls={prefixCls}
+            isShowAllDay={props.isShowAllDay}
+            timeFormat={props.timeFormat || 'HH:mm'}
+            headerRender={props.weekCellHeaderRender}
+            contentRender={props.weekCellContentRender}
+          />
+        );
+        break;
+      }
+      default:
+        table = null;
+    }
 
     const children = [
       header,

@@ -31,23 +31,25 @@ export default createReactClass({
   render() {
     const props = this.props;
     const value = this.state.value;
-    const { isShowAllDay, headerRender, timeFormat, contentRender } = props;
+    const { isShowAllDay, headerRender, timeFormat, contentRender, locale } = props;
     const prefixCls = this.prefixCls;
+    const day = value.clone();
+    // console.log(day.format('YYYY-MM-DD'), day.day())
     return (
       <div className={prefixCls} style={props.style}>
         <div className={`${prefixCls}-header`}>
           <div/>
             {Array.from({ length: 7 }, (v, i) => i).map(i =>
-              <div key={i} className={value.day() !== i && 'today' || ''}>{headerRender
-              && headerRender(value.startOf('week').add(i, 'day'))
-              || value.startOf('week').add(i, 'day').format('ddd DD/MMM')}</div>
+              <div key={i} className={value.day() === (i + 1) && 'today' || ''}>{headerRender
+              && headerRender(day.startOf('week').add(i, 'day'))
+              || day.startOf('week').add(i, 'day').format(locale.weekHeaderFormat)}</div>
             )}
         </div>
         <div className={`${prefixCls}-event`}>
           {isShowAllDay && <div className={'all-day'}>
             <div>all day</div>
             {Array.from({ length: 7 }, (v, i) => i).map(i =>
-              <div key={i} className={value.day() === i && 'today' || ''}>
+              <div key={i} className={day.day() === (i + 1) && 'today' || ''}>
                 {contentRender(value)}
               </div>
             )}
@@ -56,9 +58,9 @@ export default createReactClass({
             Array.from({ length: 24 }, (v, i) => i).map(i => {
               return (
                 <div className={'event-tr'} key={i}>
-                  <div>{value.startOf('day').add(i, 'hour').format(timeFormat)}</div>
+                  <div>{day.startOf('day').add(i, 'hour').format(timeFormat)}</div>
                     {Array.from({ length: 7 }, (v, l) => l).map(d =>
-                      <div key={d} className={value.day() === d && 'today' || ''}>
+                      <div key={d} className={value.day() === (d + 1) && 'today' || ''}>
                         {contentRender && contentRender(value) || ''}
                       </div>
                     )}

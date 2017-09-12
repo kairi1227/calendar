@@ -14,26 +14,15 @@ const WeekCalendar = createReactClass({
   },
   mixins: [CommonMixin, CalendarMixin],
 
-  getInitialState() {
-    return { mode: 'week' };
-  },
-
-
-  handlePanelChange(_, mode) {
-    if (mode === 'week') {
-      this.setState({ mode });
-    }
-  },
-
   render() {
     const { props, state } = this;
-    const { value } = state;
     const { locale, prefixCls, weekCellHeaderRender,
-        weekCellContentRender, isShowAllDay, timeFormat } = props;
+        weekCellContentRender, isShowAllDay, timeFormat, defaultValue } = props;
     const children = (
       <WeekPanel
         locale={locale}
-        defaultValue={value}
+        defaultValue={defaultValue}
+        value={state.value}
         rootPrefixCls={prefixCls}
         isShowAllDay={isShowAllDay}
         timeFormat={timeFormat || 'HH:mm'}

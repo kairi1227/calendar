@@ -23,4 +23,6 @@ export default {
   nextDecade: '下一年代',
   previousCentury: '上一世纪',
   nextCentury: '下一世纪',
+  week: '周',
+  weekHeaderFormat: 'ddd MMM-DD',
 };
