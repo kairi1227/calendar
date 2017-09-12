@@ -39,7 +39,7 @@ export default createReactClass({
         <div className={`${prefixCls}-header`}>
           <div/>
             {Array.from({ length: 7 }, (v, i) => i).map(i =>
-              <div key={i} className={value.day() === (i + 1) && 'today' || ''}>{headerRender
+              <div key={i} className={value.weekday() === i && 'today' || ''}>{headerRender
               && headerRender(header.startOf('week').add(i, 'day'), locale)
               || header.startOf('week').add(i, 'day').format(locale.weekHeaderFormat)}</div>
             )}
@@ -48,7 +48,7 @@ export default createReactClass({
           {isShowAllDay && <div className={'all-day'}>
             <div>all day</div>
             {Array.from({ length: 7 }, (v, i) => i).map(i =>
-              <div key={i} className={value.day() === (i + 1) && 'today' || ''}>
+              <div key={i} className={value.weekday() === i && 'today' || ''}>
                 {contentRender
                 && contentRender(allDay.startOf('week').add(i, 'day'), locale)
                 || null}
@@ -62,7 +62,7 @@ export default createReactClass({
                 <div className={'event-tr'} key={i}>
                   <div>{day.startOf('day').add(i, 'hour').format(timeFormat)}</div>
                     {Array.from({ length: 7 }, (v, l) => l).map(d =>
-                      <div key={d} className={value.day() === (d + 1) && 'today' || ''}>
+                      <div key={d} className={value.weekday() === d && 'today' || ''}>
                         {contentRender && contentRender(
                           cellDay.startOf('week')
                           .add(d, 'day')
